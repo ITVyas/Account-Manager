@@ -1,0 +1,1639 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(244, 247, 255);
+    scrollbar-gutter: stable both-edges;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    min-width: 1040px;
+    width: 1250px;
+    height: 750px;
+    margin: auto auto;
+    border-radius: 20px;
+    background: rgb(39, 23, 89);
+    box-shadow: 0px 0px 15px rgb(188, 188, 188);
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 400px calc(100% - 410px);
+    grid-template-rows: 100px calc(100% - 160px) 40px;
+    padding: 10px;
+    gap: 10px;
+}
+
+@media screen and (width <= 1040px) {
+    body {
+        justify-content: start;
+    }
+}
+
+#top-bar {
+    width: 100%;
+    height: 100%;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#content {
+    background-color: rgba(255, 255, 255, 0.2);
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;
+    grid-column: span 2;
+    overflow: auto;
+}
+
+#sidebar-contianer {
+    background-color: rgba(255, 255, 255, 0.2);
+    display: none;
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;
+    flex-direction: column;
+    padding: 15px;
+    grid-row: span 2;
+    overflow-y: auto;
+}
+
+.record {
+    width: 100%;
+    height: fit-content;
+    min-height: 70px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.66);
+    display: grid;
+    grid-template-columns: calc((100% - 250px)/2) calc((100% - 250px)/2) 160px 63px;
+    grid-template-rows: 60px auto;
+    padding: 5px 10px 5px 20px;
+    column-gap: 10px;
+}
+
+.record-title {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+.record-copy-password {
+    background: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 18px;
+    width: 150px; 
+    padding: 2px 15px 0;
+    height: 45px;
+    margin: auto auto;
+    cursor: pointer;
+}
+
+.record-copy-password .record-copy-password-name {
+    display: block;
+    max-width: calc(100% - 30px);
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.record-copy-password:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.record-copy-password i {
+    transform: scale(1.1);
+    margin-bottom: 1px;
+}
+
+.input-text.password:has(i.fa-eye.fa-solid) input,
+.input-text.key-phrase:has(> i.fa-eye.fa-solid) input {
+    font-size: 18px;
+}
+
+.record-login {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.show-more {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.show-more:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.top-bar-button {
+    height: 100px;
+    width: 100px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: rgb(234, 230, 255);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.top-bar-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+input {
+    background: none;
+    border: none;
+    display: block;
+}
+
+#search-record {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 45px;
+    margin: auto 0;
+    border-radius: 10px;
+    outline: none;
+    padding: 5px 10px 5px 10px;
+    font-size: 18px;
+    width: 300px;
+}
+
+#search-record::placeholder {
+    color: rgb(57, 54, 59);
+}
+
+#search-record:focus {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#key-phrase {
+    background-color: rgba(255, 234, 209, 0.5);
+    height: 45px;
+    margin: auto 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    outline: none;
+    padding: 5px 5px 5px 10px;
+    font-size: 18px;
+    width: 250px;
+}
+
+#key-phrase::placeholder {
+    color: rgb(57, 54, 59);
+    text-align: center;
+}
+
+#key-phrase:focus {
+    background-color: rgba(255, 234, 209, 0.8);
+}
+
+#root:has(#sidebar-switch.active) #sidebar-contianer {
+    display: flex;
+}
+
+#root:has(#sidebar-switch.active) #content {
+    grid-column: span 1;
+}
+
+#sidebar-switch.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#sidebar-switch.active:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#sidebar-top {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 15px 0;
+}
+
+#add-new-group {
+    height: 30px;
+    width: 30px;
+    background: none;
+    background-color: rgba(233, 252, 255, 0.6);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    padding: 1px 0 0 1px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#add-new-group:hover {
+    background-color: rgba(213, 249, 255, 0.8);
+}
+
+.group {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.6;
+    font-size: 20px;
+    border-radius: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-bottom: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.group:hover {
+    opacity: 0.75;
+}
+
+.group.all {
+    background-color: rgb(229, 255, 216);
+}
+
+.group.active {
+    opacity: 1;
+    font-weight: bold;
+    cursor: default;
+}
+
+.fullscreen-dark-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: 100;
+}
+
+#new-form-record {
+    height: 600px;
+    width: 1000px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    background-color: white;
+    display: flex;
+    z-index: 200;
+    position: relative;
+}
+
+.form-text-input {
+    height: 50px;
+    width: 400px;
+    border: 2px solid #838399;
+    border-radius: 5px;
+    outline: none;
+    padding: 2px 10px 0;
+    font-size: 18px;
+    line-height: 50px;
+}
+
+.form-text-input.title {
+    background-color: rgb(255, 249, 243);
+}
+
+.form-text-input.password {
+    background-color: rgb(246, 247, 255);
+    font-size: 24px;
+    padding-right: 44px;
+}
+
+.input-text {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    margin: 10px auto;
+}
+
+.input-text label,
+#group-pick-container label,
+#search-tags-field label {
+    font-size: 18px;
+    margin-bottom: 1px;
+    font-weight: 500;
+    color: #5a5a5a;
+    display: block;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.input-text.password {
+    position: relative;
+}
+
+.input-text.password i.fa-eye,
+.input-text.key-phrase > i.fa-eye {
+    position: absolute;
+    top: 33px;
+    right: 8px;
+    font-size: 24px;
+    display: flex;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.input-text.password i:hover,
+.input-text.key-phrase > i:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#fields-part {
+    width: 50%;
+    height: 100%;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+#picking-part {
+    width: 50%;
+    height: 100%;
+    background-color: #bfbfd8;
+    padding: 25px 20px;
+}
+
+#group-pick-container {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+}
+
+#group-pick-container label,
+#search-tags-field label {
+    color: #484541;
+}
+
+#groups-for-pick {
+    width: 400px;
+    height: 206px;
+    border: 2px solid #484541;
+    border-radius: 10px;
+    display: grid;
+    padding: 15px;
+    grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+    gap: 10px;
+    grid-auto-rows: 50px;
+    overflow-y: auto;
+}
+
+#no-groups-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1px;
+    color: #5f5b55;
+}
+
+#groups-container {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 2px;
+}
+
+#groups-container:has(#groups-for-pick:empty) #no-groups-info {
+    display: flex;
+}
+
+.picking-group {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+}
+
+.picking-group:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.picking-group.active {
+    background-color: rgba(255, 255, 255, 1);
+    border: 3px solid rgb(98, 84, 146);
+}
+
+#search-tags-field {
+    width: fit-content;
+    height: fit-content;
+    margin: 20px auto 0;
+}
+
+#search-tags-field input {
+    background-color: rgba(228, 255, 228, 0.15);
+    border-color: #484541;
+}
+
+#tags-container {
+    width: 400px;
+    height: 200px;
+    border: 2px solid #484541;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 7px;
+    overflow-y: auto;
+    scrollbar-gutter: stable both-edges;
+}
+
+#tag-input-container {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    border-radius:8px;
+}
+
+#tag-input-container input {
+    padding-right: 51px;
+    overflow: hidden;
+}
+
+#tag-input-container i {
+    position: absolute;
+    font-weight: bold;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+}
+
+#tag-input-container i:hover {
+    background-color: rgba(0, 0, 0, 0.13);
+}
+
+#submit-container {
+    width: 100%;
+    height: 80px;
+    margin: auto 0 0;
+    background-color: rgba(56, 22, 110, 0.1);
+    padding: 0 30px 0 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#save-record-btn {
+    height: 45px;
+    width: 120px;
+    background-color: #3f2261;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#save-record-btn:hover {
+    background-color: #2e154b;
+}
+
+#add-field-input {
+    height: 45px;
+    width: 310px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius:8px;
+    outline: none;
+    padding: 2px 91px 0 10px;
+    font-size: 18px;
+}
+
+#add-field-container {
+    width: 310px;
+    height: 45px;
+    position: relative;
+    overflow: hidden;
+    border-radius:8px;
+}
+
+#add-field-container i {
+    position: absolute;
+    font-size: 26px;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    top: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#add-field-container i.fa-plus {
+    right: 45px;
+}
+
+#add-field-container i:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+#tags-container .tag {
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(3, 124, 40, 0.5);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    padding: 4px 15px 6px;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7b7b7b;
+}
+
+#tags-container-hide-overflow {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.tag i {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    top: 1px;
+    left: 0;
+    display: none;
+}
+
+.tag:hover i {
+    display: flex;
+}
+
+#fields-scrollable-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.remove-field-btn {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 11px;
+    right: -14px;
+    background-color: rgb(60, 49, 59);
+    color: white;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.input-text:hover .remove-field-btn {
+    display: flex;
+}
+
+.input-text.custom {
+    position: relative;
+}
+
+.remove-field-btn:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+span.red-star {
+    color: rgb(207, 0, 0);
+}
+
+.form-text-input.key-phrase {
+    background-color: rgba(238, 238, 179, 0.2);
+}
+
+.form-reject-message {
+    position: absolute;
+    height: 45px;
+    border: 2px solid rgb(196, 4, 4);
+    background-color: white;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    white-space: nowrap;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 7px;
+    padding: 0 15px;
+    left: 50%;
+    top: -10px;
+    transform: translate(-50%, -100%);
+    opacity: 1;
+    animation: fade-in 0.3s linear;
+}
+
+#save-btn-container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+input.focus {
+    border-width: 3px;
+}
+
+@keyframes fade-in {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+#groups {
+   width: 100%;
+   height: fit-content; 
+}
+
+#new-group-name {
+    width: 300px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+    font-size: 20px;
+    padding: 0 15px;
+    outline: none;
+}
+
+#new-group-name:focus {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+#new-group-name::placeholder {
+    color: rgb(61, 48, 61);
+}
+
+.input-text.key-phrase {
+    position: relative;
+}
+
+.input-text.key-phrase input {
+    font-size: 24px;
+}
+
+
+#key-phrase-info {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: rgba(255, 153, 0, 0.2);
+    left: -8px;
+    top: 34px;
+    transform: translateX(-100%);
+    width: 30px;
+    height: 30px;
+}
+
+#key-phrase-info:hover {
+    background-color: rgba(255, 153, 0, 0.3);
+}
+
+#key-phrase-info-text {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 340px;
+    height: fit-content;
+    top: 50%;
+    left: 100%;
+    transform: translate(8px, -50%);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: rgb(230, 230, 230);
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#key-phrase-info:hover #key-phrase-info-text {
+    display: flex;
+}
+
+#key-phrase-info:hover #key-phrase-info-text:hover {
+    display: none;
+}
+
+#form-and-bg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+#form-close-btn,
+#unpack-form-close-btn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgb(185, 171, 190);
+    color: black;
+    right: 0;
+    transform: translate(35%, -35%);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+
+#form-close-btn:hover,
+#unpack-form-close-btn:hover {
+    background-color: rgb(222, 208, 228);
+}
+
+#form-close-btn i,
+#unpack-form-close-btn i {
+    font-size: 24px;
+}
+
+.context-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(231, 231, 231);
+    overflow: hidden;
+}
+
+.context-option {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+}
+
+.context-option:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.group:has(.group-rename-input) {
+    opacity: 0.9;
+}
+
+.group-rename-input {
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    outline: none;
+}
+
+.record-additional {
+    height: fit-content;
+    width: calc(100% - 30px);
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 33% 34% 33%;
+    grid-auto-rows: 100px;
+    grid-column: span 4;
+}
+
+.record-additional-field {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.record-additional-field input {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(27 27 27 / 15%);
+    border-radius: 7px;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: block;
+    margin-top: 3px;
+    outline: none;
+    padding: 0 10px;
+}
+
+.record-additional-field label {
+    display: block;
+    font-size: 18px;
+    color: rgb(54, 54, 54);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 1px;
+}
+
+.record-additional button {
+    height: 50px;
+    width: calc(100% - 20px);
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.record-remove-btn {
+    grid-row: 1;
+    grid-column: 3;
+}
+
+.edit-and-delete-block {
+    grid-row: 1;
+    grid-column: 3;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.record-remove-btn,
+.record-edit-btn {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.record-remove-btn:hover,
+.record-edit-btn:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.record-delete-verification-window {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 5px);
+    width: 260px;
+    height: fit-content;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    cursor: default;
+}
+
+.record-delete-btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.record-delete-btns button {
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 16px;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 3px;
+    cursor: pointer;
+}
+
+.delete-no {
+    width: 50%;
+    background-color: rgb(155, 27, 7);
+}
+
+.delete-yes {
+    width: 30%;
+    background-color: rgb(9, 154, 28);
+}
+
+.delete-no:hover {
+    background-color: rgb(138, 23, 5);
+}
+
+.delete-yes:hover {
+    background-color: rgb(7, 136, 24);
+}
+
+.form-text-input::placeholder {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+#top-extra-container {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+}
+
+#extra-menu {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(234, 230, 255);
+    font-size: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#extra-menu:hover, #extra-menu.active:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#extra-menu.active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#extra-menu-options {
+    color: rgb(234, 230, 255);
+    height: 100px;
+    background-color: #52457A;
+    display: flex;
+    flex-direction: row;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+
+.extra-menu-option {
+    cursor: pointer;
+    gap: 12px;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    padding: 3px 25px 0;
+    align-items: center;
+    font-size: 26px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.extra-menu-option:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.extra-menu-option i {
+    color: rgb(234, 230, 255);
+    font-size: 50px;
+    height: 60px;
+    padding-top: 3px;
+}
+
+.extra-menu-option i.fa-box-open {
+    color: rgb(234, 230, 255);
+    font-size: 45px;
+    padding-top: 9px
+}
+
+.extra-menu-option i.fa-circle-down {
+    color: rgb(234, 230, 255);
+    font-size: 45px;
+    padding-top: 8px;
+}
+
+
+#top-bar-inputs {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    gap: 10px;
+}
+
+#top-bar-inputs-animation {
+    overflow: hidden;
+    height: 100%;
+    width: fit-content;
+}
+
+#extra-menu-options-animation {
+    height: 100%;
+    width: fit-content;
+    overflow: hidden;
+}
+
+#top-key-phrase-container {
+    width: fit-content;
+    height: fit-content;
+    margin: auto 0;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    position: relative;
+}
+
+#top-key-phrase-container i.fa-eye {
+    display: flex;
+    height: 45px;
+    width: 45px;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 234, 209, 0.5);
+}
+
+#top-key-phrase-container:has(#key-phrase:focus) i.fa-eye {
+    background-color: rgba(255, 234, 209, 0.8);
+}
+
+#top-key-phrase-container:has(#key-phrase:focus) i.fa-eye:hover {
+    background-color: rgba(219, 199, 176, 0.8);
+}
+
+#top-key-phrase-container i.fa-eye:hover {
+    background-color: rgba(219, 199, 176, 0.5);
+}
+
+#key-phrase-progress-bar {
+    position: absolute;
+    top: calc(100% + 5px);
+    height: 4px;
+    border-radius: 2px;
+    width: 70px;
+    background-color: rgb(234, 230, 255);
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+#key-phrase-blur {
+    background-color: #938095;
+    height: 45px;
+    margin: auto 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    outline: none;
+    padding: 5px 5px 5px 10px;
+    font-size: 18px;
+    width: 250px;
+    color: rgb(57, 54, 59);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    cursor: text;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#top-key-phrase-container:has(#key-phrase:focus) #key-phrase-blur {
+    background-color: #D4C0B9;
+}
+
+#unpack-form {
+    display: flex;
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    position: relative;
+    flex-direction: column;
+}
+
+#backup-load-field {
+    width: 100%;
+    height: 300px;
+    background-color: #4410804f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border: 2px dashed #4c247a;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 320px;
+    max-width: 320px;
+    position: relative;
+    height: fit-content;
+}
+
+#file-upload-label:hover, 
+#file-upload-label.drag-over {
+    background: #4410801b;
+}
+
+#backup-file-upload {
+    display: none;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    color: #47135a;
+    cursor: pointer;
+}
+
+.file-icon {
+    font-size: 36px;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.file-name {
+    font-size: 20px;
+    color: #333;
+}
+
+.file-name.error {
+    color: #9b0000;
+}
+
+#unpack-modes-field {
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 30px;
+}
+
+#unpack-mode-container,
+#merge-mode-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    position: relative;
+}
+
+#unpack-mode-container {
+    padding-left: 45px;
+}
+
+#merge-mode-container {
+    padding-left: 20px;
+}
+
+.radio-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.radio-box input {
+    display: none;
+}
+
+.radio-box .custom-radio {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.radio-group-title {
+    font-size: 18px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+}
+
+#unpack-bottom-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#unpack-bottom-container button {
+    height: 50px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    background: none;
+    background-color: #2b0f4b;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+
+#unpack-bottom-container button:hover {
+    background-color: #1b0830;
+}
+
+#unpack-bottom-container button:disabled {
+    background-color: #545454;
+    cursor: default;
+}
+
+.custom-radio::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: #007bff;
+    border-radius: 50%;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.radio-box input:checked + .custom-radio::after {
+    opacity: 1;
+}
+
+#erase-confirmation-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    width: 400px;
+    height: fit-content;
+}
+
+.warning-title {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: rgb(132, 0, 0);
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.warning-text {
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#erase-confirmation-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#erase-confirmation-btns button {
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    cursor: pointer;
+}
+
+#erase-yes {
+    background-color: green;
+    padding: 5px 35px;
+}
+
+#erase-yes:hover {
+    background-color: rgb(0, 96, 0);
+}
+
+#erase-no {
+    background-color: rgb(132, 0, 0);
+    padding: 5px 80px;
+}
+
+#erase-no:hover {
+    background-color: rgb(107, 0, 0);
+}
+
+.inactive-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#merge-mode-inactive {
+    display: block;
+}
+
+#unpack-form:has(#unpack-mode-2:checked) #merge-mode-inactive {
+    display: none;
+}
+
+.unpack-report {
+    display: flex;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    flex-direction: column;
+    width: 500px;
+    height: fit-content;
+    padding: 20px 20px 10px;
+}
+
+.unpack-report-title {
+    font-size: 26px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+.unpack-report-subtitle {
+    font-size: 24px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.unpack-report-subtitle.successfuly {
+    color: green;
+}
+
+.unpack-report-subtitle.successfuly.failed {
+    color: rgb(112, 0, 0);
+}
+
+.unpack-report-table {
+    display: grid;
+    grid-template-columns: 300px 50px;
+    grid-template-rows: 40px 40px 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    margin: 30px auto 0;
+}
+
+.unpack-report-close {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: none;
+    outline: none;
+    background-color: #00438b;
+    color: white;
+    font-weight: 500;
+    padding-bottom: 1px;
+    width: 200px;
+    height: 50px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.unpack-report-close:hover {
+    background-color: #003873;
+}
+
+.unpack-start-error-msg {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+    white-space: nowrap;
+    z-index: 100;
+    animation: fade-in 0.3s linear;
+}
+
+.record-additional-field-content-container {
+    width: calc(100% - 20px);
+    height: fit-content;
+    margin: auto auto;
+}
+
+.additional-part-button-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+#pagination {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    grid-column: span 2;
+    overflow: hidden;
+    justify-content: center;
+    gap: 5px;
+}
+
+#root:has(#sidebar-switch.active) #pagination {
+    grid-column: span 1;
+}
+
+#records-container {
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page {
+    height: 100%;
+    width: 40px;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.page.active {
+    background: rgb(229, 255, 216);
+    cursor: default;
+}
+
+.page:not(.active, .disabled):hover {
+    background: rgba(229, 255, 216, 0.493);
+}
+
+.page i {
+    padding-left: 1px;
+    padding-top: 2px;
+}
+
+.page:has(i) {
+    background-color: rgba(229, 255, 216, 0.3);
+}
+
+.page.disabled {
+    color: rgb(77, 77, 77);
+    cursor: default;
+}
+
+.page.disabled:has(i) {
+    visibility: hidden;
+}

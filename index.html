@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="icon.png">
+
+    <link rel="stylesheet" href="./styles/index.css">
+
+    <title>Accout Manager</title>
+
+    <script src="https://kit.fontawesome.com/1691734459.js" crossorigin="anonymous"></script>
+    <script src="./scripts/index.js"></script>
+</head>
+<body>
+    <div id="form-and-bg-container" style="display: none;">
+        <div class="fullscreen-dark-bg"></div>
+        <form autocomplete="off" id="new-form-record">
+            <div id="form-close-btn"><i class="fa-solid fa-xmark"></i></div>
+            <div id="fields-part">
+                <div id="fields-scrollable-container">
+                    <div class="input-text">
+                        <label for="">Title <span class="red-star">*</span></label>
+                        <input type="text" name="title" class="form-text-input title">
+                    </div>
+
+                    <div class="input-text key-phrase">
+                        <label for="">Key phrase</label>
+                        <input minlength="5" maxlength="32" type="password" name="key phrase" class="form-text-input key-phrase" required>
+                        <div id="key-phrase-info">
+                            <i class="fa-solid fa-info"></i>
+                            <div id="key-phrase-info-text">Key phrase is used for en-, decryption of the password. You can have it one for all records, but don't store it anywhere!</div>
+                        </div>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+
+                <div id="submit-container">
+                    <div id="add-field-container">
+                        <input type="text" id="add-field-input" name="new-field-name" placeholder="New field name">
+                        <i title="Add public field" class="fa-solid fa-plus"></i>
+                        <i title="Add private field" class="fa-solid fa-lock"></i>
+                    </div>
+                    <div id="save-btn-container">
+                        <button id="save-record-btn">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div id="picking-part">
+                <div id="group-pick-container">
+                    <label>Want to pick groups for your record?</label>
+                    <div id="groups-container">
+                        <div id="groups-for-pick">
+                            <div class="picking-group">Mail</div>
+                            <div class="picking-group">Gmail</div>
+                            <div class="picking-group">Sites</div>
+                            <div class="picking-group">Sites</div>
+                            <div class="picking-group">Sites</div>
+                            <div class="picking-group">Sites</div>
+                            <div class="picking-group">Sites</div>
+                        </div>
+                        <div id="no-groups-info">No groups right now</div>
+                    </div>
+                </div>
+                <div id="search-tags-field">
+                    <label for="">Search words (title included by default)</label>
+                    <div id="tag-input-container">
+                        <input type="text" class="form-text-input" maxlength="25">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div id="tags-container-hide-overflow">
+                        <div id="tags-container"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div id="unpack-form-container" style="display: none;">
+        <div class="fullscreen-dark-bg">
+            <form id="unpack-form">
+                <div id="unpack-form-close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div id="backup-load-field">
+                    <label for="backup-file-upload" id="file-upload-label">
+                        <span class="file-icon">📂</span>
+                        <span class="file-label">Choose or drag a file</span>
+                        <input type="file" id="backup-file-upload">
+                        <span class="file-name" id="file-name">File is not chosen</span>
+                    </label>
+                </div>
+                <div id="unpack-modes-field">
+                    <div id="unpack-mode-container">
+                        <div class="radio-group-title">Append mode:</div>
+                        <label class="radio-box" for="unpack-mode-1">
+                            <input type="radio" name="unpack-mode" id="unpack-mode-1" value="append-all" checked>
+                            <span class="custom-radio"></span>
+                            Don't merge common
+                        </label>
+                        
+                        <label class="radio-box" for="unpack-mode-2">
+                            <input type="radio" name="unpack-mode" id="unpack-mode-2" value="merge-on-title">
+                            <span class="custom-radio"></span>
+                            Merge on Title
+                        </label>
+                    </div>
+                    <div id="merge-mode-container">
+                        <div id="merge-mode-inactive" class="inactive-container" ></div>
+                        <div class="radio-group-title">Merge mode:</div>
+                        <label class="radio-box" for="merge-mode-1">
+                            <input type="radio" name="merge-mode" id="merge-mode-1" value="replace-full-record">
+                            <span class="custom-radio"></span>
+                            Replace full record
+                        </label>
+                        
+                        <label class="radio-box" for="merge-mode-2">
+                            <input type="radio" name="merge-mode" id="merge-mode-2" value="prefer-old-values">
+                            <span class="custom-radio"></span>
+                            Prefer current values
+                        </label>
+                        
+
+                        <label class="radio-box" for="merge-mode-3">
+                            <input type="radio" name="merge-mode" id="merge-mode-3" value="prefer-new-values" checked>
+                            <span class="custom-radio"></span>
+                            Prefer external values
+                        </label>
+                    </div>
+                </div>
+                <div id="unpack-bottom-container">
+                    <button id="unpack-submit" disabled>Unpack</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="erase-confirmation-container" style="display: none;">
+        <div class="fullscreen-dark-bg">
+            <div id="erase-confirmation-window">
+                <div class="warning-title">Warning!</div>
+                <div class="warning-text">Erase action deletes all your records irrevocably. Confirm you intend to do it</div>
+                <div id="erase-confirmation-btns">
+                    <button id="erase-yes">yes</button>
+                    <button id="erase-no">no</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="root">
+        <div id="top-bar">
+            <button id="sidebar-switch" class="top-bar-button"><i class="fa-solid fa-bars"></i></button>
+            <button id="add-record-btn" class="top-bar-button"><i class="fa-solid fa-plus"></i></button>
+            <div id="top-bar-inputs-animation">
+                <div id="top-bar-inputs">
+                    <input id="search-record" type="text" placeholder="Search record...">
+                    <div id="top-key-phrase-container">
+                        <div id="key-phrase-blur">Key phrase</div>
+                        <input spellcheck="false" maxlength="32" autocomplete="one-time-code" id="key-phrase" type="password" placeholder="Key phrase">
+                        <i class="fa-regular fa-eye"></i>
+                        <div id="key-phrase-progress-bar" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="top-extra-container">
+                <div id="extra-menu-options-animation">
+                    <div id="extra-menu-options">
+                        <div id="backup-btn" class="extra-menu-option">
+                            <i class="fa-solid fa-circle-down"></i> Backup
+                        </div>
+                        <div id="erase-btn" class="extra-menu-option">
+                            <i class="fa-solid fa-eraser"></i> Erase
+                        </div>
+                        <div id="unpack-btn" class="extra-menu-option">
+                            <i class="fa-solid fa-box-open"></i> Unpack
+                        </div>
+                    </div>
+                </div>
+                <div id="extra-menu">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+        </div>
+        <div id="sidebar-contianer">
+            <div id="sidebar-top">
+                <input type="text" name="new-group-name" id="new-group-name" placeholder="New Group">
+                <button id="add-new-group">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div id="groups">
+            </div> 
+        </div>
+        <div id="content">
+            <div id="records-container">
+            </div>
+        </div>
+        <div id="pagination">
+            <div class="page disabled"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="page">1</div>
+            <div class="page">2</div>
+            <div class="page active">3</div>
+            <div class="page">4</div>
+            <div class="page disabled">5</div>
+            <div class="page"><i class="fa-solid fa-chevron-right"></i></div>
+        </div>
+    </div>
+</body>
+</html>
