@@ -197,6 +197,9 @@ const FormLogic = {
         Utility.removeContent(document.getElementById('tags-container'));
         Array.from(document.querySelectorAll(['.custom', '.form-reject-message', 'input[name="groups[]"]'])).forEach(x => x.remove());
         Array.from(document.querySelectorAll('input.focus')).forEach(x => x.classList.remove('focus'));
+        
+        const keyPhraseHideBtn = document.querySelector('.input-text.key-phrase i.fa-eye.fa-solid');
+        if(keyPhraseHideBtn) keyPhraseHideBtn.dispatchEvent(new Event('click'));
     },
 
     resetRecordForm() {
@@ -599,6 +602,7 @@ const UILogic = {
         const form = document.getElementById('new-form-record');
         document.getElementById('add-record-btn').addEventListener('click', () => {
             document.getElementById('save-record-btn').onclick = FormLogic.submitNewRecord;
+            document.querySelector('.form-text-input.key-phrase').value = document.getElementById('key-phrase').value;
             FormLogic.addGroupsToForm();
             Utility.showElement(form.parentElement);
         });
