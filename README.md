@@ -69,13 +69,13 @@ You might be wondering what kind of security is provided.
 ![image](https://github.com/user-attachments/assets/af7f5480-4fa5-4968-bb2a-0b812278d443)
 
 4. User interface is designed specially to prevent or, at least, have possibility to prevent any data leak even if you SHARE your screen:
-   - Private fields in main list of records can only be copied
-   - Form private fields are in password mode by default
-   - Main page KEY PHRASE flield has more powerful blur mode (as consequence less user-friendly, but still some kind of), so even if you share typing process, precise key length can't be known. (As shown below)
+   - Private fields in the main record list can only be copied.
+   - Private fields in form are hidden by default (password mode).
+   - The main page KEY PHRASE input has an additional blur effect. This reduces usability slightly but prevents others from determining the exact length of your phrase when watching you type. (As shown below)
 
 ![image](https://github.com/user-attachments/assets/01972f78-5327-4b35-b211-ae97b777793b)
 
-5. After 3 min of inactivity, KEY PHRASE field becomes empty and sets in blur mode automatically.
+5. After 3 minutes of inactivity, the KEY PHRASE field is automatically cleared and blurred for additional security.
 
 > [!IMPORTANT]
 > Despite your data have some high security protection, so you can even store your backup files on Desktop, you should always remain cautious. Follow basic cyber hygiene principles to stay safe online.
