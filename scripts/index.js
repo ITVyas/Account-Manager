@@ -1375,8 +1375,10 @@ const UILogic = {
 
         function resetField() {
             const keyPhraseInput = document.getElementById("key-phrase");
+            const btn = document.querySelector('#top-key-phrase-container i.fa-solid');
             keyPhraseInput.value = "";
             keyPhraseInput.dispatchEvent(new Event('input'));
+            if(btn) btn.dispatchEvent(new Event('click'));
         }
 
         function restartTimer() {
